@@ -36,6 +36,8 @@ jobs:
           at: ~/project
       - run:
           command: az webapp deployment source show --resource-group DemoApp --name dotnet-core-sample
+      - run: 
+          command: az login --use-device-code
       - run:
           name: "Deploy Web App to Azure"
           command: |
