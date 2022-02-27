@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ChatBot.Models.Map>
+@{
+    ViewData["Title"] = "Maps";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Maps</h1>
+    <h1 class="display-4">@ViewBag.Response</h1>
+
+    <table cellpadding="20" class="table">
+        <thead>
+            <tr>
+                <th>Url</th>
+                <th>Region</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <form method="post">
+                    <td>
+                        <input class="form-control" name="Url" placeholder="Url">
+                    </td>
+                    <td>
+                        <input class="form-control" name="Region" placeholder="Region">
+                    </td>
+                    <td>
+                        <input class="form-control" name="City" placeholder="City">
+                    </td>
+                    <td colspan="2">
+                        <input type="submit" class="btn btn-primary w-100" value="Add" asp-page-handler="Submit" />
+                    </td>
+                </form>
+            </tr>
+            @foreach (Map map in Model)
+            {
+                <tr>
+                    <form method="post">
+                        <input type="hidden" name="Id" value="@map.Id"/>
+                        
+                        <td>
+                            <input class="form-control" name="Url" value="@map.Url">
+                        </td>
+                        <td>
+                            <input class="form-control" name="Region" value="@map.Region">
+                        </td>
+                        <td>
+                            <input class="form-control" name="City" value="@map.City">
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-warning w-100" value="Update" asp-page-handler="Submit" />
+                        </td>
+                    </form>
+
+                    <hr>
+
+                    <td>
+                        <form method="post" action="~/Maps/Delete">
+                            <input type="hidden" value="@map.Id" name="id"/>
+                            <input type="submit" class="btn btn-danger w-100" value="Delete"/>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
